@@ -146,6 +146,16 @@ struct FdcTraits final
             ::fdc_setdrive(fdc, drive, fdd);
         }
     }
+
+    static inline auto get_unit(FdcImpl* fdc) -> int
+    {
+        return (fdc != nullptr ? ::fdc_getunit(fdc) : -1);
+    }
+
+    static inline auto is_busy(FdcImpl* fdc) -> bool
+    {
+        return (fdc != nullptr ? ((::fdc_read_ctrl(fdc) & 0x10) != 0) : false);
+    }
 };
 
 }
@@ -264,6 +274,11 @@ struct FddTraits final
             filename = ::fdl_getfilename(fdd);
         }
         return filename;
+    }
+
+    static inline auto get_motor(FddImpl* fdd) -> bool
+    {
+        return (fdd != nullptr ? (::fd_getmotor(fdd) != 0) : false);
     }
 };
 
@@ -468,6 +483,29 @@ auto Instance::get_filename(const int drive) -> std::string
             break;
     }
     return filename;
+}
+
+auto Instance::is_active(const int drive) -> bool
+{
+    FddImpl* fdd = nullptr;
+
+    switch(drive) {
+        case Drive::FDC_DRIVE0:
+            fdd = _state.fd0;
+            break;
+        case Drive::FDC_DRIVE1:
+            fdd = _state.fd1;
+            break;
+        case Drive::FDC_DRIVE2:
+            fdd = _state.fd2;
+            break;
+        case Drive::FDC_DRIVE3:
+            fdd = _state.fd3;
+            break;
+        default:
+            break;
+    }
+    return (FdcTraits::get_unit(_state.fdc) == drive) && (FdcTraits::is_busy(_state.fdc) || FddTraits::get_motor(fdd));
 }
 
 auto Instance::set_motor(uint8_t data) -> uint8_t

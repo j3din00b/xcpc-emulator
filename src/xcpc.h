@@ -311,6 +311,8 @@ public: // public signals
 
     virtual auto on_statistics() -> void = 0;
 
+    virtual auto on_drive_activity() -> void = 0;
+
     virtual auto on_snapshot_load() -> void = 0;
 
     virtual auto on_snapshot_save() -> void = 0;

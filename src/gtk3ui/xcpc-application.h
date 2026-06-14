@@ -607,9 +607,9 @@ public: // public interface
 
     auto set_state(const std::string& state) -> void;
 
-    auto set_drive0(const std::string& drive0) -> void;
+    auto set_drive0(const std::string& drive0, bool active) -> void;
 
-    auto set_drive1(const std::string& drive1) -> void;
+    auto set_drive1(const std::string& drive1, bool active) -> void;
 
     auto set_system(const std::string& system) -> void;
 
@@ -625,6 +625,8 @@ private: // private data
     gtk3::Label _system;
     gtk3::Label _volume;
     gtk3::Label _stats;
+    std::string _drive0_markup;
+    std::string _drive1_markup;
 };
 
 }
@@ -896,6 +898,8 @@ public: // public signals
 
     virtual auto on_statistics() -> void override final;
 
+    virtual auto on_drive_activity() -> void override final;
+
     virtual auto on_snapshot_load() -> void override final;
 
     virtual auto on_snapshot_save() -> void override final;
@@ -1037,6 +1041,7 @@ private: // private data
     gdk3::Pixbuf    _app_icon;
     impl::AppWindow _app_window;
     guint           _timer;
+    guint           _drive_timer;
 };
 
 }

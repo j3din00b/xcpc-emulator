@@ -228,6 +228,16 @@ auto Machine::get_drive1_filename() const -> std::string
     return _mainboard.get_drive1_filename();
 }
 
+auto Machine::get_drive0_active() const -> bool
+{
+    return _mainboard.get_drive0_active();
+}
+
+auto Machine::get_drive1_active() const -> bool
+{
+    return _mainboard.get_drive1_active();
+}
+
 auto Machine::get_system_info() const -> std::string
 {
     return _mainboard.get_system_info();

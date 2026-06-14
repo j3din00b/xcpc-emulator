@@ -1098,6 +1098,22 @@ auto Mainboard::get_drive1_filename() const -> std::string
     return "";
 }
 
+auto Mainboard::get_drive0_active() const -> bool
+{
+    if(_fdc != nullptr) {
+        return _fdc->is_active(fdc::FDC_DRIVE0);
+    }
+    return false;
+}
+
+auto Mainboard::get_drive1_active() const -> bool
+{
+    if(_fdc != nullptr) {
+        return _fdc->is_active(fdc::FDC_DRIVE1);
+    }
+    return false;
+}
+
 auto Mainboard::get_system_info() const -> std::string
 {
     std::string system_info;

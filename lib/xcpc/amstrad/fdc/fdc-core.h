@@ -109,6 +109,8 @@ public: // public interface
 
     auto get_filename(const int drive) -> std::string;
 
+    auto is_active(const int drive) -> bool;
+
     auto set_motor(uint8_t data) -> uint8_t;
 
     auto rd_stat(uint8_t data) -> uint8_t;

@@ -181,6 +181,14 @@ struct Callbacks
         return TRUE;
     }
 
+    static auto on_drive_activity(Application* application) -> gboolean
+    {
+        if(application != nullptr) {
+            application->on_drive_activity();
+        }
+        return TRUE;
+    }
+
     static auto on_ignore(GtkWidget* widget, Application* application) -> void
     {
         if(application != nullptr) {
@@ -2067,13 +2075,14 @@ auto InfoBar::set_state(const std::string& state) -> void
     return update();
 }
 
-auto InfoBar::set_drive0(const std::string& drive0) -> void
+auto InfoBar::set_drive0(const std::string& drive0, bool active) -> void
 {
     std::string label(_("{unknown}"));
 
     auto format_label = [&]() -> void
     {
-        const char* format = "<span foreground='yellow' background='darkblue'> A: %s </span>";
+        const char* format = (active != false ? "<span foreground='yellow' background='darkred'> A: %s </span>"
+                                               : "<span foreground='yellow' background='darkblue'> A: %s </span>");
         char*       string = ::g_markup_printf_escaped(format, drive0.c_str());
         if(string != nullptr) {
             std::string(string).swap(label);
@@ -2083,7 +2092,10 @@ auto InfoBar::set_drive0(const std::string& drive0) -> void
 
     auto update_label = [&]() -> void
     {
-        _drive0.set_markup(label);
+        if(label != _drive0_markup) {
+            _drive0_markup = label;
+            _drive0.set_markup(label);
+        }
     };
 
     auto update = [&]() -> void
@@ -2095,13 +2107,14 @@ auto InfoBar::set_drive0(const std::string& drive0) -> void
     return update();
 }
 
-auto InfoBar::set_drive1(const std::string& drive1) -> void
+auto InfoBar::set_drive1(const std::string& drive1, bool active) -> void
 {
     std::string label(_("{unknown}"));
 
     auto format_label = [&]() -> void
     {
-        const char* format = "<span foreground='yellow' background='darkblue'> B: %s </span>";
+        const char* format = (active != false ? "<span foreground='yellow' background='darkred'> B: %s </span>"
+                                               : "<span foreground='yellow' background='darkblue'> B: %s </span>");
         char*       string = ::g_markup_printf_escaped(format, drive1.c_str());
         if(string != nullptr) {
             std::string(string).swap(label);
@@ -2111,7 +2124,10 @@ auto InfoBar::set_drive1(const std::string& drive1) -> void
 
     auto update_label = [&]() -> void
     {
-        _drive1.set_markup(label);
+        if(label != _drive1_markup) {
+            _drive1_markup = label;
+            _drive1.set_markup(label);
+        }
     };
 
     auto update = [&]() -> void
@@ -2519,6 +2535,7 @@ Application::Application(int& argc, char**& argv)
     , _app_icon(nullptr)
     , _app_window(*this)
     , _timer(0)
+    , _drive_timer(0)
 {
 }
 
@@ -2888,6 +2905,12 @@ auto Application::on_statistics() -> void
     update_stats();
 }
 
+auto Application::on_drive_activity() -> void
+{
+    update_drive0();
+    update_drive1();
+}
+
 auto Application::on_snapshot_load() -> void
 {
     LoadSnapshotDialog dialog(*this);
@@ -3199,7 +3222,8 @@ auto Application::on_about() -> void
 
 auto Application::start_timer() -> void
 {
-    static constexpr guint interval = 1511;
+    static constexpr guint interval     = 1511;
+    static constexpr guint drv_interval =  127;
 
     if(_timer != 0) {
         _timer = (static_cast<void>(::g_source_remove(_timer)), 0);
@@ -3207,12 +3231,21 @@ auto Application::start_timer() -> void
     if(_timer == 0) {
         _timer = ::g_timeout_add(interval, G_SOURCE_FUNC(&Callbacks::on_statistics), this);
     }
+    if(_drive_timer != 0) {
+        _drive_timer = (static_cast<void>(::g_source_remove(_drive_timer)), 0);
+    }
+    if(_drive_timer == 0) {
+        _drive_timer = ::g_timeout_add(drv_interval, G_SOURCE_FUNC(&Callbacks::on_drive_activity), this);
+    }
 }
 
 auto Application::stop_timer() -> void
 {
     if(_timer != 0) {
         _timer = (static_cast<void>(::g_source_remove(_timer)), 0);
+    }
+    if(_drive_timer != 0) {
+        _drive_timer = (static_cast<void>(::g_source_remove(_drive_timer)), 0);
     }
 }
 
@@ -3326,7 +3359,7 @@ auto Application::update_drive0() -> void
 
     auto update_label = [&]() -> void
     {
-        info_bar().set_drive0(label);
+        info_bar().set_drive0(label, _machine->get_drive0_active());
     };
 
     auto do_update = [&]() -> void
@@ -3356,7 +3389,7 @@ auto Application::update_drive1() -> void
 
     auto update_label = [&]() -> void
     {
-        info_bar().set_drive1(label);
+        info_bar().set_drive1(label, _machine->get_drive1_active());
     };
 
     auto do_update = [&]() -> void

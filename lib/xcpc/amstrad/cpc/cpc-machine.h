@@ -103,6 +103,10 @@ public: // public interface
 
     auto get_drive1_filename() const -> std::string;
 
+    auto get_drive0_active() const -> bool;
+
+    auto get_drive1_active() const -> bool;
+
     auto get_system_info() const -> std::string;
 
     auto get_statistics() const -> std::string;
