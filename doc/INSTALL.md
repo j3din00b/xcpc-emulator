@@ -12,6 +12,7 @@ Mandatory dependencies :
 build-essential
 xorg-dev
 libgtk-3-dev
+libepoxy-dev
 ```
 
 Optional dependencies :

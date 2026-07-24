@@ -24,16 +24,16 @@ Emulation options:
     --rom003={filename}         16Kb expansion rom #03
     --rom004={filename}         16Kb expansion rom #04
     --rom005={filename}         16Kb expansion rom #05
-    --rom006={filename}         16Kb expansion rom #07
-    --rom007={filename}         16Kb expansion rom #08
-    --rom008={filename}         16Kb expansion rom #09
-    --rom009={filename}         16Kb expansion rom #10
-    --rom010={filename}         16Kb expansion rom #11
-    --rom011={filename}         16Kb expansion rom #12
-    --rom012={filename}         16Kb expansion rom #13
-    --rom013={filename}         16Kb expansion rom #14
-    --rom014={filename}         16Kb expansion rom #15
-    --rom015={filename}         16Kb expansion rom #16
+    --rom006={filename}         16Kb expansion rom #06
+    --rom007={filename}         16Kb expansion rom #07
+    --rom008={filename}         16Kb expansion rom #08
+    --rom009={filename}         16Kb expansion rom #09
+    --rom010={filename}         16Kb expansion rom #10
+    --rom011={filename}         16Kb expansion rom #11
+    --rom012={filename}         16Kb expansion rom #12
+    --rom013={filename}         16Kb expansion rom #13
+    --rom014={filename}         16Kb expansion rom #14
+    --rom015={filename}         16Kb expansion rom #15
     --drive0={filename}         drive0 disk image
     --drive1={filename}         drive1 disk image
     --snapshot={filename}       initial snapshot
@@ -115,6 +115,7 @@ You can adjust audio parameters if they are not good by default.
 
   - `XCPC_AUDIO_CHANNELS`: the channel count, `1` for mono, `2` for stereo
   - `XCPC_AUDIO_SAMPLERATE`: the sample rate, for example `11025`, `22050`, `44100`, `48000`
+  - `XCPC_AUDIO_PERIODSIZEINMILLISECONDS`: the audio period size in milliseconds
 
 Example for a low-end hardware:
 

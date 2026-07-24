@@ -7,6 +7,9 @@ Here is a non-exhaustive list of supported features:
   - A complete Gtk+-3.x user interface.
   - Full X11 with XShm extension.
   - No Wayland support but runs well under XWayland.
+  - Two rendering backends: OpenGL (default) and legacy XImage, selectable at runtime.
+  - CRT monitor emulation (barrel distortion, scanlines, shadow mask, vignetting) via a GLSL shader, adjustable at runtime.
+  - Audio output of the PSG (AY-3-8912) through the portable miniaudio backend (mono, stereo or surround).
   - Adaptative frame-rate.
   - Full Floppy disk images support (.dsk).
   - Full snapshot support (.sna).
