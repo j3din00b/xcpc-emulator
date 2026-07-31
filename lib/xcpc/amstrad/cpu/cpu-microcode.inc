@@ -272,6 +272,7 @@
         m_load_rg(R1_H, BC_H); \
         m_load_rg(R1_L, port); \
         m_iorq_rd(R1_W, R0_L); \
+        m_load_rg(R2_L, AF_L); \
         m_load_rg(data, R0_L); \
         R3_L = PZS[R0_L]; \
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
@@ -281,7 +282,7 @@
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* PF is affected     */ (PF & (R3_L)) \
              | /* NF is reset        */ (NF & (0x00)) \
-             | /* CF is not affected */ (CF & (AF_L)) \
+             | /* CF is not affected */ (CF & (R2_L)) \
              ; \
     } while(0)
 
@@ -846,7 +847,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (R0_L ^ R1_L ^ R2_L)) \
+             | /* HF is affected     */ (HF & (R0_L ^ R1_L ^ R2_L)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* VF is affected     */ (VF & ((((R1_L & ~R2_L & ~R0_L) | (~R1_L & R2_L & R0_L)) & SF) != 0 ? 0xff : 0x00)) \
              | /* NF is set          */ (NF & (0xff)) \
@@ -906,7 +907,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (R0_L ^ R1_L ^ R2_L)) \
+             | /* HF is affected     */ (HF & (R0_L ^ R1_L ^ R2_L)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* VF is affected     */ (VF & ((((R1_L & R2_L & ~R0_L) | (~R1_L & ~R2_L & R0_L)) & SF) != 0 ? 0xff : 0x00)) \
              | /* NF is reset        */ (NF & (0x00)) \
@@ -928,7 +929,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (R0_L ^ R1_L ^ R2_L)) \
+             | /* HF is affected     */ (HF & (R0_L ^ R1_L ^ R2_L)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* VF is affected     */ (VF & ((((R1_L & R2_L & ~R0_L) | (~R1_L & ~R2_L & R0_L)) & SF) != 0 ? 0xff : 0x00)) \
              | /* NF is reset        */ (NF & (0x00)) \
@@ -950,7 +951,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (R0_L ^ R1_L ^ R2_L)) \
+             | /* HF is affected     */ (HF & (R0_L ^ R1_L ^ R2_L)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* VF is affected     */ (VF & ((((R1_L & R2_L & ~R0_L) | (~R1_L & ~R2_L & R0_L)) & SF) != 0 ? 0xff : 0x00)) \
              | /* NF is reset        */ (NF & (0x00)) \
@@ -988,7 +989,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (R0_L ^ R1_L ^ R2_L)) \
+             | /* HF is affected     */ (HF & (R0_L ^ R1_L ^ R2_L)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* VF is affected     */ (VF & ((((R1_L & R2_L & ~R0_L) | (~R1_L & ~R2_L & R0_L)) & SF) != 0 ? 0xff : 0x00)) \
              | /* NF is reset        */ (NF & (0x00)) \
@@ -1010,7 +1011,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (R0_L ^ R1_L ^ R2_L)) \
+             | /* HF is affected     */ (HF & (R0_L ^ R1_L ^ R2_L)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* VF is affected     */ (VF & ((((R1_L & R2_L & ~R0_L) | (~R1_L & ~R2_L & R0_L)) & SF) != 0 ? 0xff : 0x00)) \
              | /* NF is reset        */ (NF & (0x00)) \
@@ -1032,7 +1033,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (R0_L ^ R1_L ^ R2_L)) \
+             | /* HF is affected     */ (HF & (R0_L ^ R1_L ^ R2_L)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* VF is affected     */ (VF & ((((R1_L & R2_L & ~R0_L) | (~R1_L & ~R2_L & R0_L)) & SF) != 0 ? 0xff : 0x00)) \
              | /* NF is reset        */ (NF & (0x00)) \
@@ -1070,7 +1071,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (R0_L ^ R1_L ^ R2_L)) \
+             | /* HF is affected     */ (HF & (R0_L ^ R1_L ^ R2_L)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* VF is affected     */ (VF & ((((R1_L & ~R2_L & ~R0_L) | (~R1_L & R2_L & R0_L)) & SF) != 0 ? 0xff : 0x00)) \
              | /* NF is set          */ (NF & (0xff)) \
@@ -1092,7 +1093,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (R0_L ^ R1_L ^ R2_L)) \
+             | /* HF is affected     */ (HF & (R0_L ^ R1_L ^ R2_L)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* VF is affected     */ (VF & ((((R1_L & ~R2_L & ~R0_L) | (~R1_L & R2_L & R0_L)) & SF) != 0 ? 0xff : 0x00)) \
              | /* NF is set          */ (NF & (0xff)) \
@@ -1114,7 +1115,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (R0_L ^ R1_L ^ R2_L)) \
+             | /* HF is affected     */ (HF & (R0_L ^ R1_L ^ R2_L)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* VF is affected     */ (VF & ((((R1_L & ~R2_L & ~R0_L) | (~R1_L & R2_L & R0_L)) & SF) != 0 ? 0xff : 0x00)) \
              | /* NF is set          */ (NF & (0xff)) \
@@ -1152,7 +1153,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (R0_L ^ R1_L ^ R2_L)) \
+             | /* HF is affected     */ (HF & (R0_L ^ R1_L ^ R2_L)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* VF is affected     */ (VF & ((((R1_L & ~R2_L & ~R0_L) | (~R1_L & R2_L & R0_L)) & SF) != 0 ? 0xff : 0x00)) \
              | /* NF is set          */ (NF & (0xff)) \
@@ -1174,7 +1175,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (R0_L ^ R1_L ^ R2_L)) \
+             | /* HF is affected     */ (HF & (R0_L ^ R1_L ^ R2_L)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* VF is affected     */ (VF & ((((R1_L & ~R2_L & ~R0_L) | (~R1_L & R2_L & R0_L)) & SF) != 0 ? 0xff : 0x00)) \
              | /* NF is set          */ (NF & (0xff)) \
@@ -1196,7 +1197,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (R0_L ^ R1_L ^ R2_L)) \
+             | /* HF is affected     */ (HF & (R0_L ^ R1_L ^ R2_L)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* VF is affected     */ (VF & ((((R1_L & ~R2_L & ~R0_L) | (~R1_L & R2_L & R0_L)) & SF) != 0 ? 0xff : 0x00)) \
              | /* NF is set          */ (NF & (0xff)) \
@@ -1338,7 +1339,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (0x00)) \
+             | /* HF is reset        */ (HF & (0x00)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* PF is affected     */ (PF & (R3_L)) \
              | /* NF is reset        */ (NF & (0x00)) \
@@ -1360,7 +1361,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (0x00)) \
+             | /* HF is reset        */ (HF & (0x00)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* PF is affected     */ (PF & (R3_L)) \
              | /* NF is reset        */ (NF & (0x00)) \
@@ -1420,7 +1421,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (0x00)) \
+             | /* HF is reset        */ (HF & (0x00)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* PF is affected     */ (PF & (R3_L)) \
              | /* NF is reset        */ (NF & (0x00)) \
@@ -1442,7 +1443,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (0x00)) \
+             | /* HF is reset        */ (HF & (0x00)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* PF is affected     */ (PF & (R3_L)) \
              | /* NF is reset        */ (NF & (0x00)) \
@@ -1483,7 +1484,7 @@
              | /* XF is undocumented */ (XF & (R2_L)) \
              | /* VF is affected     */ (VF & ((((R1_L & ~R2_L & ~R0_L) | (~R1_L & R2_L & R0_L)) & SF) != 0 ? 0xff : 0x00)) \
              | /* NF is set          */ (NF & (0xff)) \
-             | /* CF is reset        */ (CF & (R0_H & CF)) \
+             | /* CF is affected     */ (CF & (R0_H & CF)) \
              ; \
     } while(0)
 
@@ -1504,7 +1505,7 @@
              | /* XF is undocumented */ (XF & (R2_L)) \
              | /* VF is affected     */ (VF & ((((R1_L & ~R2_L & ~R0_L) | (~R1_L & R2_L & R0_L)) & SF) != 0 ? 0xff : 0x00)) \
              | /* NF is set          */ (NF & (0xff)) \
-             | /* CF is reset        */ (CF & (R0_H & CF)) \
+             | /* CF is affected     */ (CF & (R0_H & CF)) \
              ; \
     } while(0)
 
@@ -1525,7 +1526,7 @@
              | /* XF is undocumented */ (XF & (R2_L)) \
              | /* VF is affected     */ (VF & ((((R1_L & ~R2_L & ~R0_L) | (~R1_L & R2_L & R0_L)) & SF) != 0 ? 0xff : 0x00)) \
              | /* NF is set          */ (NF & (0xff)) \
-             | /* CF is reset        */ (CF & (R0_H & CF)) \
+             | /* CF is affected     */ (CF & (R0_H & CF)) \
              ; \
     } while(0)
 
@@ -1558,7 +1559,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (R0_L ^ R1_L ^ R2_L)) \
+             | /* HF is affected     */ (HF & (R0_L ^ R1_L ^ R2_L)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* VF is affected     */ (VF & (R1_L == 0x7f ? 0xff : 0x00)) \
              | /* NF is reset        */ (NF & (0x00)) \
@@ -1580,7 +1581,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (R0_L ^ R1_L ^ R2_L)) \
+             | /* HF is affected     */ (HF & (R0_L ^ R1_L ^ R2_L)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* VF is affected     */ (VF & (R1_L == 0x7f ? 0xff : 0x00)) \
              | /* NF is reset        */ (NF & (0x00)) \
@@ -1618,7 +1619,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (R0_L ^ R1_L ^ R2_L)) \
+             | /* HF is affected     */ (HF & (R0_L ^ R1_L ^ R2_L)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* VF is affected     */ (VF & (R1_L == 0x80 ? 0xff : 0x00)) \
              | /* NF is set          */ (NF & (0xff)) \
@@ -1640,7 +1641,7 @@
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
              | /* YF is undocumented */ (YF & (R3_L)) \
-             | /* HF is set          */ (HF & (R0_L ^ R1_L ^ R2_L)) \
+             | /* HF is affected     */ (HF & (R0_L ^ R1_L ^ R2_L)) \
              | /* XF is undocumented */ (XF & (R3_L)) \
              | /* VF is affected     */ (VF & (R1_L == 0x80 ? 0xff : 0x00)) \
              | /* NF is set          */ (NF & (0xff)) \
@@ -1732,7 +1733,7 @@
              | /* HF is affected     */ (HF & ((R0_W ^ R1_W ^ R2_W) & 0x1000 ? 0xff : 0x00)) \
              | /* XF is undocumented */ (XF & (R0_H)) \
              | /* VF is affected     */ (VF & ((R1_W ^ R2_W) & (R1_W ^ R0_W) & 0x8000 ? 0xff : 0x00)) \
-             | /* NF is reset        */ (NF & (0xff)) \
+             | /* NF is set          */ (NF & (0xff)) \
              | /* CF is affected     */ (CF & ((SLONG(R1_W) - SLONG(R2_W) - SLONG(R3_W)) & 0x10000 ? 0xff : 0x00)) \
              ; \
         reg1 = R0_W; \
@@ -2345,6 +2346,12 @@
 
 #define m_reti() \
     do { \
+        if((ST_L & ST_IFF2) != 0) { \
+            m_setu_bit(ST_L, (ST_IFF1)); \
+        } \
+        else { \
+            m_clru_bit(ST_L, (ST_IFF1)); \
+        } \
         m_mreq_rd(SP_W++, WZ_L); \
         m_mreq_rd(SP_W++, WZ_H); \
         m_load_rg(PC_W  , WZ_W); \
@@ -2959,7 +2966,7 @@
 #define m_sla_r08(data) \
     do { \
         R1_L = data; \
-        R0_L = (SBYTE(R1_L) << 1); \
+        R0_L = (UBYTE(R1_L) << 1); \
         R3_L = PZS[R0_L]; \
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \
@@ -2980,7 +2987,7 @@
 #define m_sla_ind_r16(addr) \
     do { \
         m_mreq_rd(addr, R1_L); \
-        R0_L = (SBYTE(R1_L) << 1); \
+        R0_L = (UBYTE(R1_L) << 1); \
         R3_L = PZS[R0_L]; \
         AF_L = /* SF is affected     */ (SF & (R3_L)) \
              | /* ZF is affected     */ (ZF & (R3_L)) \

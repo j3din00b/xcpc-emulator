@@ -420,6 +420,7 @@ prolog:
 
 check_nmi:
     if(m_take_nmi()) {
+        m_refresh_dram();
         m_rst_vec16(VECTOR_66H);
         m_consume(3, 11);
         goto epilog;
@@ -428,9 +429,11 @@ check_nmi:
 
 check_int:
     if(m_take_int()) {
+        m_refresh_dram();
         switch(m_interrupt_mode()) {
             case 0:
                 m_iorq_m1(0x0000, OP_L);
+                m_consume(0, 2);
                 goto execute_opcode;
             case 1:
                 m_iorq_m1(0x0000, R1_L);

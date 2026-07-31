@@ -1773,7 +1773,7 @@
                 m_nop();
                 m_consume(m_cycles, t_states);
             }
-            break;
+            goto fetch_dd_opcode;
         case 0xde: /* sbc a,n */
             {
                 constexpr uint32_t m_cycles = (3 - 1);
@@ -1901,7 +1901,7 @@
                 m_nop();
                 m_consume(m_cycles, t_states);
             }
-            break;
+            goto fetch_ed_opcode;
         case 0xee: /* xor a,n */
             {
                 constexpr uint32_t m_cycles = (3 - 1);
@@ -2029,7 +2029,7 @@
                 m_nop();
                 m_consume(m_cycles, t_states);
             }
-            break;
+            goto fetch_fd_opcode;
         case 0xfe: /* cp a,n */
             {
                 constexpr uint32_t m_cycles = (3 - 1);

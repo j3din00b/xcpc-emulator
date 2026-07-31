@@ -8,7 +8,7 @@
             break;
         case 0x01: /* ld bc,nn */
             {
-                constexpr uint32_t m_cycles = (2);
+                constexpr uint32_t m_cycles = (3);
                 constexpr uint32_t t_states = (10);
                 m_ld_r16_i16(BC_W);
                 m_consume(m_cycles, t_states);
@@ -136,7 +136,7 @@
             break;
         case 0x11: /* ld de,nn */
             {
-                constexpr uint32_t m_cycles = (2);
+                constexpr uint32_t m_cycles = (3);
                 constexpr uint32_t t_states = (10);
                 m_ld_r16_i16(DE_W);
                 m_consume(m_cycles, t_states);
@@ -264,7 +264,7 @@
             break;
         case 0x21: /* ld hl,nn */
             {
-                constexpr uint32_t m_cycles = (2);
+                constexpr uint32_t m_cycles = (3);
                 constexpr uint32_t t_states = (10);
                 m_ld_r16_i16(HL_W);
                 m_consume(m_cycles, t_states);
@@ -392,7 +392,7 @@
             break;
         case 0x31: /* ld sp,nn */
             {
-                constexpr uint32_t m_cycles = (2);
+                constexpr uint32_t m_cycles = (3);
                 constexpr uint32_t t_states = (10);
                 m_ld_r16_i16(SP_W);
                 m_consume(m_cycles, t_states);
@@ -1862,7 +1862,7 @@
                 m_consume(m_cycles, t_states);
             }
             break;
-        case 0xe9: /* jp hl */
+        case 0xe9: /* jp (hl) */
             {
                 constexpr uint32_t m_cycles = (1);
                 constexpr uint32_t t_states = (4);
