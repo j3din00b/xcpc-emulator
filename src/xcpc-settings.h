@@ -1,5 +1,5 @@
 /*
- * xcpc-settings-file.h - Copyright (c) 2001-2026 - Olivier Poncet
+ * xcpc-settings.h - Copyright (c) 2001-2026 - Olivier Poncet
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,6 +18,9 @@
 #define __XCPC_SETTINGS_H__
 
 #include <map>
+#include <vector>
+#include <memory>
+#include <string>
 
 // ---------------------------------------------------------------------------
 // forward declarations
@@ -54,6 +57,10 @@ public: // public interface
 
     auto name() const -> const std::string&;
 
+    auto comment() const -> const std::string&;
+
+    auto set_comment(const std::string& comment) -> void;
+
     auto get_bool(const bool fallback) const -> bool;
 
     auto get_long(const long fallback) const -> long;
@@ -66,7 +73,7 @@ public: // public interface
 
     auto set_long(const long value) -> void;
 
-    auto set_double(const double value) -> void;
+    auto set_double(const double value, const int precision = 6) -> void;
 
     auto set_string(const std::string& value) -> void;
 
@@ -74,6 +81,7 @@ public: // public interface
 
 private: // private data
     const std::string _name;
+    std::string       _comment;
     std::string       _value;
     bool              _has_value;
 };
@@ -103,15 +111,24 @@ public: // public interface
 
     auto name() const -> const std::string&;
 
+    auto comment() const -> const std::string&;
+
+    auto set_comment(const std::string& comment) -> void;
+
     auto entry(const std::string& key) -> SettingsEntry&;
 
     auto entry(const std::string& key) const -> const SettingsEntry&;
 
     auto has_entry(const std::string& key) const -> bool;
 
+    auto remove_entry(const std::string& key) -> bool;
+
+    auto clear() -> void;
+
 public: // public types
-    using EntryMap = std::map<std::string, std::unique_ptr<SettingsEntry>>;
-    using const_iterator = EntryMap::const_iterator;
+    using EntryList      = std::vector<std::unique_ptr<SettingsEntry>>;
+    using EntryIndex     = std::map<std::string, SettingsEntry*>;
+    using const_iterator = EntryList::const_iterator;
 
     auto begin() const -> const_iterator;
 
@@ -119,7 +136,9 @@ public: // public types
 
 private: // private data
     const std::string _name;
-    EntryMap          _entries;
+    std::string       _comment;
+    EntryList         _entries;
+    EntryIndex        _index;
 };
 
 }
@@ -145,22 +164,42 @@ public: // public interface
 
     virtual ~SettingsFile() = default;
 
-    auto load() -> void;
+    auto load() -> bool;
 
-    auto save() -> void;
+    auto save() -> bool;
+
+    auto dirname() const -> const std::string&;
+
+    auto filename() const -> const std::string&;
+
+    auto fullpath() const -> const std::string&;
 
     auto table(const std::string& name) -> SettingsTable&;
 
     auto table(const std::string& name) const -> const SettingsTable&;
 
-private: // private data
-    using TableMap = std::map<std::string, std::unique_ptr<SettingsTable>>;
+    auto has_table(const std::string& name) const -> bool;
+
+    auto remove_table(const std::string& name) -> bool;
+
+    auto clear() -> void;
+
+public: // public types
+    using TableList      = std::vector<std::unique_ptr<SettingsTable>>;
+    using TableIndex     = std::map<std::string, SettingsTable*>;
+    using const_iterator = TableList::const_iterator;
+
+    auto begin() const -> const_iterator;
+
+    auto end() const -> const_iterator;
 
 private: // private data
     const std::string _dirname;
     const std::string _filename;
     const std::string _fullpath;
-    TableMap          _tables;
+    TableList         _tables;
+    TableIndex        _index;
+    std::string       _epilog;
 };
 
 }

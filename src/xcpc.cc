@@ -229,6 +229,7 @@ auto Application::save_settings() -> void
     {
         try {
             SettingsFile settings_file("xcpc.conf");
+            settings_file.load();
             save_audio_settings(settings_file);
             save_video_settings(settings_file);
             save_input_settings(settings_file);
