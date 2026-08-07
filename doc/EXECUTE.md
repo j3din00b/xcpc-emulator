@@ -78,7 +78,7 @@ The available loglevel values are:
 #### Runtime
 
 When Xcpc is run in portable mode or installed in a location other than that configured during compilation, you must tell the emulator where to find some resources such as the logo and the original ROMs (firmware and base).
- 
+
 You can set some environment variables to fix some paths:
 
   - `XCPC_BINDIR`: optional, not currently used
@@ -113,18 +113,18 @@ export XCPC_JOYSTICK1="{path-to-joystick1}"
 
 You can adjust audio parameters if they are not good by default.
 
-  - `XCPC_AUDIO_CHANNELS`: the channel count, `1` for mono, `2` for stereo
+  - `XCPC_AUDIO_CHANNELS`: the channel count, `1` for mono, `2` for stereo, `4` for surround 4.0
   - `XCPC_AUDIO_SAMPLERATE`: the sample rate, for example `11025`, `22050`, `44100`, `48000`
   - `XCPC_AUDIO_PERIODSIZEINMILLISECONDS`: the audio period size in milliseconds
 
-Example for a low-end hardware:
+Example for low-end hardware:
 
 ```
 export XCPC_AUDIO_CHANNELS="1"
 export XCPC_AUDIO_SAMPLERATE="11025"
 ```
 
-Example for a high-end hardware:
+Example for high-end hardware:
 
 ```
 export XCPC_AUDIO_CHANNELS="2"
@@ -146,9 +146,9 @@ Some Hotkeys/shortcuts are available:
 
 ### KEYBOARD
 
-The left control keys (`Left Control`, `Left Alt`, ...) are sent to the emulated machine, so if you want to send some keycodes (eg. when you are using an `AZERTY` keyboard), you must use the right control keys of your keyboard (`Right Control`, `Right Shift`, `AltGr`, ...).
+The left control keys (`Left Control`, `Left Alt`, ...) are sent to the emulated machine, so if you want to send some keycodes (e.g. when you are using an `AZERTY` keyboard), you must use the right control keys of your keyboard (`Right Control`, `Right Shift`, `AltGr`, ...).
 
-If you don't have a joystick or if the joystick support is not available at compilation time, a joystick emulator is provided:
+If you don't have a joystick or if joystick support is not available at compilation time, a joystick emulator is provided:
 
   - `Home` or `End` for toggling the joystick emulation.
   - `Cursor Up` for moving the joystick up.
@@ -160,13 +160,13 @@ If you don't have a joystick or if the joystick support is not available at comp
 
 ### JOYSTICK
 
-A joystick support is available under Linux:
+Joystick support is available under Linux:
 
   - Up to two physical joysticks can be used.
   - Joysticks must be plugged before launching Xcpc.
   - Joysticks are tied by default to `/dev/input/js0` and `/dev/input/js1`.
-  - You can set the `XCPC_JOYSTICK0` environment variable to specify 1st joystick device.
-  - You can set the `XCPC_JOYSTICK1` environment variable to specify 2nd joystick device.
+  - You can set the `XCPC_JOYSTICK0` environment variable to specify the first joystick device.
+  - You can set the `XCPC_JOYSTICK1` environment variable to specify the second joystick device.
 
 ### DRAG'N DROP
 

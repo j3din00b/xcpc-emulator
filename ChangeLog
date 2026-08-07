@@ -1,9 +1,9 @@
-2026-06-14	Olivier Poncet <olivier.poncet@xcpc-emulator.net>
+2026-08-07	Olivier Poncet <olivier.poncet@xcpc-emulator.net>
 
 	* Compilation fixes (GLib + Gtk)
 	* Some bug fixes and refactoring
 	* New OpenGL renderer (some UI rendering glitches may persist)
-	* Emulator Settings are loaded/saved from/to disk (~/.config/xcpc/xcpc.ini)
+	* Emulator Settings are loaded/saved from/to disk (~/.config/xcpc/xcpc.conf)
 	* Some UI improvements and refactoring
 	* Zip support for disk images
 	* Better disk images compatibility

@@ -1,8 +1,8 @@
 ## LICENSES
 
-Xcpc is a free software, so it's source code is free (free as in freedom, not free as in free beer).
+Xcpc is free software, so its source code is free (free as in freedom, not free as in free beer).
 
-Due to the fact that Xcpc is an emulator, it has been designed to deal with old copyrighted softwares, so you should take your own responsibility about these softwares.
+Due to the fact that Xcpc is an emulator, it has been designed to deal with old copyrighted software, so you should use this software at your own risk and responsibility.
 
 ### LICENSE TERMS
 
@@ -25,13 +25,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 ```
 
-### LEGAL INFORMATIONS
+### LEGAL INFORMATION
 
 Xcpc is distributed with some copyrighted materials from Amstrad with their permission.
 
 ```
-Amstrad has kindly given it's permission for it's copyrighted
-material to be redistributed but Amstrad retains it's copyright.
+Amstrad has kindly given its permission for its copyrighted
+material to be redistributed but Amstrad retains its copyright.
 
 Some of the Amstrad CPC ROM code is copyright Locomotive Software.
 ```
@@ -48,12 +48,12 @@ ROM and DISK images at your own risk and responsibility.
 
 miniaudio v0.11.25, a single file audio playback and capture library written in C.
 
-This library is embedded into this projet in split form.
+This library is embedded into this project in split form.
 
   - https://miniaud.io/
 
 ```
-Copyright 2025 David Reid
+Copyright 2026 David Reid
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -75,7 +75,7 @@ SOFTWARE.
 
 libdsk v1.4.2, a library for accessing discs and disc image files.
 
-This library is embedded into this projet with some little fixes.
+This library is embedded into this project with some little fixes.
 
   - https://www.seasip.info/Unix/LibDsk/
 
@@ -105,7 +105,7 @@ MA 02111-1307, USA
 
 lib765 v0.4.2, a library to emulate the uPD765a floppy controller (aka Intel 8272).
 
-This library is embedded into this projet with some little fixes.
+This library is embedded into this project with some little fixes.
 
   - https://www.seasip.info/Unix/LibDsk/
 

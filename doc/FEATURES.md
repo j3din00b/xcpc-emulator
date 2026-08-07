@@ -10,13 +10,13 @@ Here is a non-exhaustive list of supported features:
   - Two rendering backends: OpenGL (default) and legacy XImage, selectable at runtime.
   - CRT monitor emulation (barrel distortion, scanlines, shadow mask, vignetting) via a GLSL shader, adjustable at runtime.
   - Audio output of the PSG (AY-3-8912) through the portable miniaudio backend (mono, stereo or surround).
-  - Adaptative frame-rate.
+  - Adaptive frame-rate.
   - Full Floppy disk images support (.dsk).
   - Full snapshot support (.sna).
   - Drag and Drop support (.sna, .dsk, .dsk.gz, .dsk.bz2, .zip).
   - Keyboard emulation (qwerty, azerty).
   - Joystick emulation with the numeric keypad when numlock is disabled.
-  - Joystick emulation by pressing the « Home » or « End » key (then use arrows + left-ctrl + left-alt).
+  - Joystick emulation by pressing the `Home` or `End` key (then use arrows + left-ctrl + left-alt).
   - Joystick support (up to two hardware joysticks).
   - CPU: full support of the Z80 with documented and undocumented instructions.
   - VGA: full support of the Video Gate Array 40007/40008/40010.

@@ -4,7 +4,7 @@ Xcpc is a portable Amstrad CPC 464/664/6128 emulator written in C and C++. It is
 
 Note there is absolutely no support for Microsoft Windows operating systems and there never will be. Please do not ask me to add such functionality.
 
-Xcpc is designed to emulate classic range of the Amstrad CPC systems :
+Xcpc is designed to emulate the classic range of the Amstrad CPC systems:
 
   - Amstrad CPC 464 (v1).
   - Amstrad CPC 664 (v2).
